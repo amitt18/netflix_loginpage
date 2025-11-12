@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Netflix Login</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background-color: black;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .login-box {
+      background-color: rgba(0, 0, 0, 0.75);
+      padding: 40px;
+      border-radius: 8px;
+      width: 320px;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 4px;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 10px;
+      background-color: #e50914;
+      border: none;
+      color: white;
+      font-weight: bold;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .error {
+      color: #ff4747;
+      font-size: 14px;
+      margin-top: -5px;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-box">
+    <h2>Sign In</h2>
+    <form id="loginForm" onsubmit="return validateForm()">
+      <input type="email" id="email" placeholder="Email">
+      <div id="emailError" class="error"></div>
+
+      <input type="password" id="password" placeholder="Password">
+      <div id="passwordError" class="error"></div>
+
+      <button type="submit" class="btn">Sign In</button>
+    </form>
+  </div>
+
+  <script>
+    function validateForm() {
+      // Get values
+      let email = document.getElementById("email").value.trim();
+      let password = document.getElementById("password").value.trim();
+      let emailError = document.getElementById("emailError");
+      let passwordError = document.getElementById("passwordError");
+
+      // Reset previous errors
+      emailError.textContent = "";
+      passwordError.textContent = "";
+
+      let valid = true;
+
+      // Check email empty
+      if (email === "") {
+        emailError.textContent = "Email is required!";
+        valid = false;
+      } 
+      // Check valid email pattern
+      else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        emailError.textContent = "Enter a valid email address!";
+        valid = false;
+      }
+
+      // Check password empty
+      if (password === "") {
+        passwordError.textContent = "Password is required!";
+        valid = false;
+      } 
+      // Check password length
+      else if (password.length < 6) {
+        passwordError.textContent = "Password must be at least 6 characters!";
+        valid = false;
+      }
+
+      // Return validation result
+      return valid;
+    }
+  </script>
+
+</body>
+</html>
+
